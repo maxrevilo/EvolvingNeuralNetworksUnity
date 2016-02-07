@@ -11,7 +11,7 @@ public class CritterSensors : BaseBehaviour
     [SerializeField]
     private Transform antenaR;
 
-    public SceneManager scene;
+    public FeedStarveManager scene;
 
     private GameObject[] foods;
 
