@@ -216,7 +216,7 @@ MonoBehaviour:
   critterPrefab: {fileID: 184624, guid: 75e1bb0e2503bd34ca5ac2c6c7d2bcf6, type: 2}
   foodPrefab: {fileID: 198124, guid: 5391c5b598e59324689cd669a1a33b5c, type: 2}
   crittersAmount: 10
-  foodAmount: 40
+  foodAmount: 30
 --- !u!61 &1416988374
 BoxCollider2D:
   m_ObjectHideFlags: 0

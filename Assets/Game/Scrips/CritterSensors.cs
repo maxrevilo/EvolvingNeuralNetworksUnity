@@ -47,12 +47,16 @@ public class CritterSensors : BaseBehaviour
         return antenaLSignal;
     }
 
+    private static Color debugColor = new Color(0, 1, 1, .3f);
+
     private void FixedUpdate()
     {
         InsertionSort(foods);
         if(foods.Length > 0)
         {
             GameObject closestFood = foods[0];
+
+            Debug.DrawLine(transform.position, closestFood.transform.position, debugColor);
 
             antenaLSignal = Vector3.Distance(antenaL.position, closestFood.transform.position);
             antenaRSignal = Vector3.Distance(antenaR.position, closestFood.transform.position);
@@ -79,11 +83,17 @@ public class CritterSensors : BaseBehaviour
 
     private float distance(GameObject gameObject)
     {
-        Vector3 iPos = transform.position;
-        Vector3 fPos = gameObject.transform.position;
-        float dX = fPos.x - iPos.x;
-        float dZ = fPos.z - iPos.z;
-        return dX * dX + dZ * dZ;
+        if(gameObject.activeInHierarchy)
+        {
+            Vector3 iPos = transform.position;
+            Vector3 fPos = gameObject.transform.position;
+            float dX = fPos.x - iPos.x;
+            float dY = fPos.y - iPos.y;
+            return dX * dX + dY * dY;
+        } else
+        {
+            return float.MaxValue;
+        }
     }
 
     private void CritterDied()

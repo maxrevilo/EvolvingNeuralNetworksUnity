@@ -1,14 +1,20 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class FoodCtrl : BaseBehaviour
 {
     [SerializeField]
     int feedAmount = 40;
 
+    public void Initialize()
+    {
+        gameObject.SetActive(true);
+    }
+
     void Start()
     {
         setupGraphics();
         setupLogic();
+        Initialize();
     }
 
     void setupLogic()
@@ -30,8 +36,8 @@ public class FoodCtrl : BaseBehaviour
         if(critter != null)
         {
             critter.Feed(feedAmount);
+            gameObject.SetActive(false);
         }
 
-        gameObject.SetActive(false);
     }
 }

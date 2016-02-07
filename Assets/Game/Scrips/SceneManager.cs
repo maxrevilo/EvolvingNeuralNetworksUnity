@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
+using System.Collections.Generic;
+using ANNs;
 
 public class SceneManager : BaseBehaviour
 {
@@ -22,9 +24,11 @@ public class SceneManager : BaseBehaviour
 
     GameObject bestCritter;
 
-    public int generation { get; private set; }
+    public int generationNumber { get; private set; }
 
     private int crittersAlive = 0;
+
+    private LinkedList<Generation> generations;
 
     void Start()
     {
@@ -34,7 +38,9 @@ public class SceneManager : BaseBehaviour
 
         stageArea.isTrigger = true;
 
-        generation = 0;
+        generationNumber = 0;
+
+        generations = new LinkedList<Generation>();
 
         SpawnFood();
         SpawnCritters();
@@ -118,6 +124,9 @@ public class SceneManager : BaseBehaviour
 
             food.transform.position = position;
             food.transform.rotation = rotation;
+
+            FoodCtrl foodCtrl = food.GetComponent<FoodCtrl>();
+            foodCtrl.Initialize();
         }
     }
 
@@ -134,20 +143,32 @@ public class SceneManager : BaseBehaviour
 
     void StartGeneration()
     {
-        generation++;
+        generationNumber++;
         crittersAlive = 0;
 
-        Debug.Log("New generation " + generation);
+        Debug.Log("New generation " + generationNumber);
 
         ResetFood();
         ResetCritters();
+
+        Generation currentGeneration = new Generation("G" + generationNumber);
+        generations.AddLast(currentGeneration);
     }
 
     void EndGeneration()
     {
         CritterCtrl critterCtrl = bestCritter.GetComponent<CritterCtrl>();
 
-        Debug.Log(String.Format("Generation ended, fitness {0}s", critterCtrl.LifeSpan() ));
+        Generation currentGeneration = generations.Last.Value;
+
+        foreach(GameObject critter in critters)
+        {
+            CritterCtrl ctrl = critter.GetComponent<CritterCtrl>();
+            CritterANNControl ann = critter.GetComponent<CritterANNControl>();
+            currentGeneration.AddPhenotype(ann.neuralNetwork.ws, ctrl.LifeSpan());        
+        }
+
+        Debug.Log(String.Format("Generation ended, fitness {0}s", currentGeneration.BestFitness() ));
         
         Invoke("StartGeneration", 3);
     }

@@ -82,7 +82,7 @@ public class CritterCtrl : BaseBehaviour
         enabled = false;
         life = 0;
         deadTime = Time.time;
-        Debug.Log("Critter died after " + LifeSpan() + "s");
+        //Debug.Log("Critter died after " + LifeSpan() + "s");
         if (OnDied != null) OnDied(gameObject);
     }
 

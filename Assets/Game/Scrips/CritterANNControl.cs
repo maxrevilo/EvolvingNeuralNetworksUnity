@@ -6,7 +6,7 @@ using System;
 [RequireComponent(typeof(CritterSensors))]
 public class CritterANNControl : BaseBehaviour
 {
-    private NeuralNetwork neuralNetwork;
+    public NeuralNetwork neuralNetwork { get; private set; }
     private CritterMotor critterMotor;
     private CritterSensors critterSensors;
 

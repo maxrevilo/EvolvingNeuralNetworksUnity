@@ -332,7 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fefd4f4f41778847a737d875526a12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topology: 030000000500000002000000
+  topology: 030000000800000002000000
 --- !u!114 &11496480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,6 +454,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Critter
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: topology.Array.data[1]
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
