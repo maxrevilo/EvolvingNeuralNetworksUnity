@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SceneManager : BaseBehaviour
-{
+public class BaseBehaviour : MonoBehaviour {
 }
