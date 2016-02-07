@@ -22,8 +22,6 @@ public class SceneManager : BaseBehaviour
     public GameObject[] critters {  get; private set; }
     public GameObject[] foods { get; private set; }
 
-    GameObject bestCritter;
-
     public int generationNumber { get; private set; }
 
     private int crittersAlive = 0;
@@ -136,7 +134,6 @@ public class SceneManager : BaseBehaviour
 
         if(crittersAlive <= 0)
         {
-            bestCritter = critter;
             EndGeneration();
         }
     }
@@ -151,14 +148,27 @@ public class SceneManager : BaseBehaviour
         ResetFood();
         ResetCritters();
 
+        if(generations.Count > 0)
+        {
+            Generation prevGeneration = generations.Last.Value;
+            float[][][] offspring = prevGeneration.GenerateOffspring(crittersAmount);
+
+            int i = 0;
+            foreach(float[][] genes in offspring)
+            {
+                GameObject critter = critters[i];
+                CritterANNControl ann = critter.GetComponent<CritterANNControl>();
+                ann.neuralNetwork.SetWeights(genes);
+                i++;
+            }
+        }
+
         Generation currentGeneration = new Generation("G" + generationNumber);
         generations.AddLast(currentGeneration);
     }
 
     void EndGeneration()
     {
-        CritterCtrl critterCtrl = bestCritter.GetComponent<CritterCtrl>();
-
         Generation currentGeneration = generations.Last.Value;
 
         foreach(GameObject critter in critters)

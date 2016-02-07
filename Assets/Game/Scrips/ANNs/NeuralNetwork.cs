@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace ANNs
 {
@@ -30,6 +30,17 @@ namespace ANNs
             }
         }
 
+        public void SetWeights(float[][] newWs)
+        {
+            for (int i = 1; i < ws.Length; i++)
+            {
+                for (int j = 0; j < ws[i].Length; j++)
+                {
+                    ws[i][j] = newWs[i][j];
+                }
+            }
+        }
+
         public float[] Query(float[] input)
         {
             if (input.Length != topology[0])
@@ -58,7 +69,7 @@ namespace ANNs
             return tempResults[topology.Length - 1];
         }
 
-        public void RandomizeWeights(int seed, float min = -100, float max = 100)
+        public void RandomizeWeights(int seed, float min = -10, float max = 10)
         {
             Random rand = new Random(seed);
 

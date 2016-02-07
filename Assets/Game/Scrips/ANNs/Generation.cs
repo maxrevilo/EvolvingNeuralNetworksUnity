@@ -36,5 +36,84 @@ namespace ANNs
             return bestPhenotype;
         }
 
+        public Phenotype[] ChooseBestByRoulete(int qty)
+        {
+            Phenotype[] result = new Phenotype[qty];
+
+            float minFitness = float.MinValue;
+            float totalDiffFitness = 0;
+
+            foreach (Phenotype phenotype in phenotypes)
+            {
+                if (minFitness > phenotype.fitness) minFitness = phenotype.fitness;
+                totalDiffFitness += phenotype.fitness;
+            }
+
+            totalDiffFitness -= minFitness * phenotypes.Count;
+
+            Random rnd = new Random();
+
+            KeyValuePair<Phenotype, double>[] candiates = new KeyValuePair<Phenotype, double>[phenotypes.Count];
+            int i = 0;
+            foreach (Phenotype phenotype in phenotypes)
+            {
+                double p = rnd.NextDouble() * (phenotype.fitness - minFitness) / totalDiffFitness;
+                candiates[i] = new KeyValuePair<Phenotype, double>(phenotype, p);
+                i++;
+            }
+
+            candiates.OrderByDescending(
+                (KeyValuePair<Phenotype, double> candidate) => candidate.Value
+
+            );
+
+            int added = 0;
+            foreach (KeyValuePair<Phenotype, double> candidate in candiates)
+            {
+                result[added++] = candidate.Key;
+                if (added >= qty) break;
+            }
+
+            return result;
+        }
+
+        public float[][][] GenerateOffspring(int qty)
+        {
+            float[][][] result = new float[qty][][];
+
+            Phenotype[] parents = ChooseBestByRoulete(phenotypes.Count / 3);
+
+            for(int i = 0; i < qty; i++)
+            {
+                Phenotype parentA = parents[i % parents.Length];
+                Phenotype parentB = parents[UnityEngine.Random.Range(0, parents.Length)];
+                
+                float[][] newGenes = BreedFromCrossover(parentA.genotype, parentB.genotype);
+
+                result[i] = newGenes;
+            }
+
+            return result;
+        }
+
+        private float[][] BreedFromCrossover(float[][] genesA, float[][] genesB)
+        {
+            Random rnd = new Random();
+            float[][] result = (float[][]) genesA.Clone();
+            for(int i = 0; i < genesA.Length; i++)
+            {
+                result[i] = (float[]) genesA[i].Clone();
+
+                for(int j = 0; j < result[i].Length; j++)
+                {
+                    if(rnd.Next() > 0.5)
+                    {
+                        result[i][j] = genesB[i][j];
+                    }
+                }
+            }
+
+            return result;
+        }
     }
 }
