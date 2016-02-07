@@ -146,7 +146,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 9.930636
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -229,8 +229,8 @@ MonoBehaviour:
   stageArea: {fileID: 1416988374}
   critterPrefab: {fileID: 184624, guid: 75e1bb0e2503bd34ca5ac2c6c7d2bcf6, type: 2}
   foodPrefab: {fileID: 198124, guid: 5391c5b598e59324689cd669a1a33b5c, type: 2}
-  crittersAmount: 10
-  foodAmount: 80
+  crittersAmount: 30
+  foodAmount: 100
 --- !u!61 &1416988374
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -242,6 +242,6 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: 0.41760254, y: 0.3419838}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 57.949432, y: 34.592907}
+  m_Size: {x: 28.359985, y: 16.988869}

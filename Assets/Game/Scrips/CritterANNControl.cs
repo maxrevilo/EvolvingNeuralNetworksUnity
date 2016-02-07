@@ -12,6 +12,10 @@ public class CritterANNControl : BaseBehaviour
 
     [SerializeField]
     private int[] topology = new int[] { 3, 5, 2 };
+    [SerializeField]
+    private float minNeuronInitialWeight = -10;
+    [SerializeField]
+    private float maxNeuronInitialWeight = 10;
 
     void Awake()
     {
@@ -22,15 +26,16 @@ public class CritterANNControl : BaseBehaviour
     void Start()
     {
         neuralNetwork = new NeuralNetwork(topology);
-        neuralNetwork.RandomizeWeights(UnityEngine.Random.Range(int.MinValue + 1, int.MaxValue - 1));
+        int seed = UnityEngine.Random.Range(int.MinValue + 1, int.MaxValue - 1);
+        neuralNetwork.RandomizeWeights(seed, minNeuronInitialWeight, maxNeuronInitialWeight);
     }
 
     void Update()
     {
         float[] input = new float[] {
-            critterSensors.SampleLife(),
-            critterSensors.SampleAntenaL(),
-            critterSensors.SampleAntenaR()
+            critterSensors.SampleLife() / 100f,
+            5f / critterSensors.SampleAntenaL(),
+            5f / critterSensors.SampleAntenaR()
         };
 
         float[] output = neuralNetwork.Query(input);

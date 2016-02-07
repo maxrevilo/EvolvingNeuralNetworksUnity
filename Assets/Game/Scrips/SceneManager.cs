@@ -175,7 +175,7 @@ public class SceneManager : BaseBehaviour
         {
             CritterCtrl ctrl = critter.GetComponent<CritterCtrl>();
             CritterANNControl ann = critter.GetComponent<CritterANNControl>();
-            currentGeneration.AddPhenotype(ann.neuralNetwork.ws, ctrl.LifeSpan());        
+            currentGeneration.AddPhenotype(ann.neuralNetwork.ws, ctrl.LifeSpan() - ctrl.naturalLifeSpan());        
         }
 
         Debug.Log(String.Format("Generation ended, fitness {0}s", currentGeneration.BestFitness() ));

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 
 public class CritterCtrl : BaseBehaviour
@@ -45,6 +45,11 @@ public class CritterCtrl : BaseBehaviour
     public void Overfeeded()
     {
         Die();
+    }
+
+    public float naturalLifeSpan()
+    {
+        return maxLife / lifeConsumtion;
     }
 
     public float LifeSpan()

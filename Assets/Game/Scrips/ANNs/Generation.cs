@@ -39,25 +39,21 @@ namespace ANNs
         public Phenotype[] ChooseBestByRoulete(int qty)
         {
             Phenotype[] result = new Phenotype[qty];
-
-            float minFitness = float.MinValue;
-            float totalDiffFitness = 0;
+            
+            float totalFitness = 0;
 
             foreach (Phenotype phenotype in phenotypes)
             {
-                if (minFitness > phenotype.fitness) minFitness = phenotype.fitness;
-                totalDiffFitness += phenotype.fitness;
+                totalFitness += phenotype.fitness;
             }
-
-            totalDiffFitness -= minFitness * phenotypes.Count;
-
+            
             Random rnd = new Random();
 
             KeyValuePair<Phenotype, double>[] candiates = new KeyValuePair<Phenotype, double>[phenotypes.Count];
             int i = 0;
             foreach (Phenotype phenotype in phenotypes)
             {
-                double p = rnd.NextDouble() * (phenotype.fitness - minFitness) / totalDiffFitness;
+                double p = (0.5 + rnd.NextDouble() * 0.5) * phenotype.fitness / totalFitness;
                 candiates[i] = new KeyValuePair<Phenotype, double>(phenotype, p);
                 i++;
             }

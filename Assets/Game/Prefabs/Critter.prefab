@@ -333,6 +333,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topology: 030000000a00000002000000
+  minNeuronInitialWeight: -80
+  maxNeuronInitialWeight: 80
 --- !u!114 &11496480
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -482,6 +484,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: minNeuronInitialWeight
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxNeuronInitialWeight
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
