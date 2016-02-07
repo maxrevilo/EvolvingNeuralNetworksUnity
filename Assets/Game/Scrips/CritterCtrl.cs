@@ -3,6 +3,9 @@ using System;
 
 public class CritterCtrl : BaseBehaviour
 {
+    public delegate void DiedEvent(GameObject critter);
+    public event DiedEvent OnDied;
+
     [SerializeField]
     private int maxLife = 100;
 
@@ -44,7 +47,7 @@ public class CritterCtrl : BaseBehaviour
         Die();
     }
 
-    public float lifeSpan()
+    public float LifeSpan()
     {
         if(deadTime > birthTime)
         {
@@ -60,12 +63,27 @@ public class CritterCtrl : BaseBehaviour
         SendMessage("CritterDied");
     }
 
+    public void Initialize()
+    {
+        SendMessage("CritterRespawned");
+    }
+
+    private void CritterRespawned()
+    {
+        life = maxLife;
+        enabled = true;
+        birthTime = Time.time;
+        deadTime = 0;
+        lastTimeSienceConsumtion = Time.time;
+    }
+
     private void CritterDied()
     {
         enabled = false;
         life = 0;
         deadTime = Time.time;
-        Debug.Log("Critter died after " + lifeSpan() + "s");
+        Debug.Log("Critter died after " + LifeSpan() + "s");
+        if (OnDied != null) OnDied(gameObject);
     }
 
     private float lastTimeSienceConsumtion;
@@ -74,9 +92,7 @@ public class CritterCtrl : BaseBehaviour
 
     void Start()
     {
-        birthTime = Time.time;
-        deadTime = 0;
-        lastTimeSienceConsumtion = Time.time;
+        Initialize();
     }
 
     void FixedUpdate()

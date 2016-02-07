@@ -6,13 +6,12 @@ using System;
 [RequireComponent(typeof(CritterSensors))]
 public class CritterANNControl : BaseBehaviour
 {
-
     private NeuralNetwork neuralNetwork;
     private CritterMotor critterMotor;
     private CritterSensors critterSensors;
 
     [SerializeField]
-    private int[] topology = new int[] {3, 5, 2};
+    private int[] topology = new int[] { 3, 5, 2 };
 
     void Awake()
     {
@@ -20,13 +19,14 @@ public class CritterANNControl : BaseBehaviour
         critterSensors = GetComponent<CritterSensors>();
     }
 
-    void Start () {
+    void Start()
+    {
         neuralNetwork = new NeuralNetwork(topology);
-        int epoch = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
-        neuralNetwork.RandomizeWeights(epoch);
+        neuralNetwork.RandomizeWeights(UnityEngine.Random.Range(int.MinValue + 1, int.MaxValue - 1));
     }
-	
-    void Update () {
+
+    void Update()
+    {
         float[] input = new float[] {
             critterSensors.SampleLife(),
             critterSensors.SampleAntenaL(),
@@ -50,5 +50,10 @@ public class CritterANNControl : BaseBehaviour
     private void CritterDied()
     {
         enabled = false;
+    }
+
+    private void CritterRespawned()
+    {
+        enabled = true;
     }
 }

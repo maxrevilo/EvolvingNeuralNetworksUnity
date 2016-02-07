@@ -11,19 +11,22 @@ public class CritterSensors : BaseBehaviour
     [SerializeField]
     private Transform antenaR;
 
+    public SceneManager scene;
+
     private GameObject[] foods;
 
-    private float antenaLSignal = 0f;
-    private float antenaRSignal = 0f;
+    private float antenaLSignal = float.MaxValue;
+    private float antenaRSignal = float.MaxValue;
 
     void Awake()
     {
         critterCtrl = GetComponent<CritterCtrl>();
 
-        foods = GameObject.FindGameObjectsWithTag("Food");
+        foods = (GameObject[]) scene.foods.Clone();
 
         if (antenaL == null) throw new Exception("antenaL not set");
         if (antenaR == null) throw new Exception("antenaL not set");
+        if (scene == null) throw new Exception("scene not set");
     }
 
     public int SampleLife()
@@ -44,10 +47,13 @@ public class CritterSensors : BaseBehaviour
     private void FixedUpdate()
     {
         InsertionSort(foods);
-        GameObject closestFood = foods[0];
+        if(foods.Length > 0)
+        {
+            GameObject closestFood = foods[0];
 
-        antenaLSignal = Vector3.Distance(antenaL.position, transform.position);
-        antenaRSignal = Vector3.Distance(antenaR.position, transform.position);
+            antenaLSignal = Vector3.Distance(antenaL.position, transform.position);
+            antenaRSignal = Vector3.Distance(antenaR.position, transform.position);
+        }
     }
 
     private void InsertionSort(GameObject[] inputArray)
@@ -75,5 +81,15 @@ public class CritterSensors : BaseBehaviour
         float dX = fPos.x - iPos.x;
         float dZ = fPos.z - iPos.z;
         return dX * dX + dZ * dZ;
+    }
+
+    private void CritterDied()
+    {
+        enabled = false;
+    }
+
+    private void CritterRespawned()
+    {
+        enabled = true;
     }
 }

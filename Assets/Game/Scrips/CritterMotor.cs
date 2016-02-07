@@ -38,6 +38,11 @@ public class CritterMotor : BaseBehaviour
         turningSpeed = 0;
     }
 
+    private void CritterRespawned()
+    {
+        enabled = true;
+    }
+
     private void CritterDied()
     {
         enabled = false;

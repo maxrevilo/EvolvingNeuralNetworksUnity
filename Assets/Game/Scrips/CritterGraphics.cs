@@ -35,6 +35,10 @@ class CritterGraphics: BaseBehaviour
         torzo.color = currentColor;
     }
 
+    private void CritterRespawned()
+    {
+        enabled = true;
+    }
 
     private void CritterDied()
     {
