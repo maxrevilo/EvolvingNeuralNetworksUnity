@@ -97,6 +97,7 @@ GameObject:
   - 92: {fileID: 852778856}
   - 124: {fileID: 852778855}
   - 81: {fileID: 852778854}
+  - 114: {fileID: 852778859}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -134,7 +135,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -145,7 +146,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -171,6 +172,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1416988372}
   m_RootOrder: 0
+--- !u!114 &852778859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 852778853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c066cb8bc97da54290196b79682cfdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
+  scrollSpeed: 1
 --- !u!1 &1416988371
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +230,7 @@ MonoBehaviour:
   critterPrefab: {fileID: 184624, guid: 75e1bb0e2503bd34ca5ac2c6c7d2bcf6, type: 2}
   foodPrefab: {fileID: 198124, guid: 5391c5b598e59324689cd669a1a33b5c, type: 2}
   crittersAmount: 10
-  foodAmount: 30
+  foodAmount: 80
 --- !u!61 &1416988374
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -228,6 +242,6 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -0.050743103, y: -0.05074835}
+  m_Offset: {x: 0.41760254, y: 0.3419838}
   serializedVersion: 2
-  m_Size: {x: 17.0028, y: 10.777608}
+  m_Size: {x: 57.949432, y: 34.592907}
