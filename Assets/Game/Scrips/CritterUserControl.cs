@@ -3,7 +3,7 @@
 [RequireComponent(typeof(CritterMotor))]
 public class CritterUserControl : BaseBehaviour
 {
-    CritterMotor critterMotor;
+    private CritterMotor critterMotor;
 
     void Start()
     {
