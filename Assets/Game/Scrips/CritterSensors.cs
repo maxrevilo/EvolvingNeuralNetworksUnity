@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 
 [RequireComponent(typeof(CritterCtrl))]
@@ -22,10 +22,13 @@ public class CritterSensors : BaseBehaviour
     {
         critterCtrl = GetComponent<CritterCtrl>();
 
-        foods = (GameObject[]) scene.foods.Clone();
-
         if (antenaL == null) throw new Exception("antenaL not set");
         if (antenaR == null) throw new Exception("antenaL not set");
+    }
+
+    void Start()
+    {
+        foods = (GameObject[])scene.foods.Clone();
         if (scene == null) throw new Exception("scene not set");
     }
 
@@ -51,8 +54,8 @@ public class CritterSensors : BaseBehaviour
         {
             GameObject closestFood = foods[0];
 
-            antenaLSignal = Vector3.Distance(antenaL.position, transform.position);
-            antenaRSignal = Vector3.Distance(antenaR.position, transform.position);
+            antenaLSignal = Vector3.Distance(antenaL.position, closestFood.transform.position);
+            antenaRSignal = Vector3.Distance(antenaR.position, closestFood.transform.position);
         }
     }
 
