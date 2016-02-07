@@ -12,7 +12,7 @@ GameObject:
   - 23: {fileID: 2359514}
   - 54: {fileID: 5451386}
   m_Layer: 0
-  m_Name: SpaceBody
+  m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

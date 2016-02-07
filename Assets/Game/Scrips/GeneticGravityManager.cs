@@ -80,7 +80,7 @@ public class GeneticGravityManager : SceneManager
     protected override void StartGeneration()
     {
         ResetBoxes();
-        /*
+        
         if (generations.Count > 0)
         {
             Generation prevGeneration = generations.Last.Value;
@@ -90,22 +90,44 @@ public class GeneticGravityManager : SceneManager
             foreach (float[][] genes in offspring)
             {
                 GameObject box = boxes[i];
+                setGenesToBox(genes, box);
                 i++;
             }
         }
-        */
+
         base.StartGeneration();
+
+        EndGeneration();
     }
 
     protected override void EndGeneration()
     {
         Generation currentGeneration = generations.Last.Value;
-        /*
         foreach (GameObject box in boxes)
         {
-            currentGeneration.AddPhenotype(ann.neuralNetwork.ws, 0);
-        }*/
+            currentGeneration.AddPhenotype(getGenesFromBox(box), getBoxFitness(box));
+        }
 
         base.EndGeneration();
+    }
+
+    protected void setGenesToBox(float[][] genes, GameObject box)
+    {
+        box.transform.position = new Vector3(genes[0][0], genes[0][1], genes[0][2]);
+    }
+
+    protected float[][] getGenesFromBox(GameObject box)
+    {
+        float[][] result = new float[1][];
+        result[0] = new float[3];
+        result[0][0] = box.transform.position.x;
+        result[0][1] = box.transform.position.y;
+        result[0][2] = box.transform.position.z;
+        return result;
+    }
+
+    protected float getBoxFitness(GameObject box)
+    {
+        return 100 / Vector3.Distance(box.transform.position, targetDestination.position);
     }
 }

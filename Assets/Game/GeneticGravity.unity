@@ -353,7 +353,7 @@ MonoBehaviour:
   stageArea: {fileID: 1771711830}
   boxPrefab: {fileID: 173734, guid: 45247a8277bce0c42a8e60a45cc0cde9, type: 2}
   targetDestination: {fileID: 1630732575}
-  boxesAmount: 100
+  boxesAmount: 1000
 --- !u!65 &1771711830
 BoxCollider:
   m_ObjectHideFlags: 0
