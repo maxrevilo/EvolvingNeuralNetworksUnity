@@ -118,7 +118,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 446532}
-  - 114: {fileID: 11496480}
   - 114: {fileID: 11432346}
   - 114: {fileID: 11404752}
   - 114: {fileID: 11451234}
@@ -292,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 3
-  maxAngularSpeed: 360
+  maxAngularSpeed: 720
 --- !u!114 &11432346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,22 +331,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fefd4f4f41778847a737d875526a12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  topology: 030000000a00000002000000
-  minNeuronInitialWeight: -6
-  maxNeuronInitialWeight: 6
---- !u!114 &11496480
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 184624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fb71bea8be837d42aa50649c469741d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 3
-  maxAngularSpeed: 180
+  topology: 03000000090000000900000002000000
+  minNeuronInitialWeight: -30
+  maxNeuronInitialWeight: 30
 --- !u!212 &21209426
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -447,7 +433,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: topology.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
@@ -463,19 +449,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: topology.Array.data[1]
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: topology.Array.data[2]
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: topology.Array.data[3]
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxAngularSpeed
-      value: 180
+      value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
@@ -487,11 +473,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: minNeuronInitialWeight
-      value: -6
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxNeuronInitialWeight
-      value: 6
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: topology.Array.data[4]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: topology.Array.data[0]
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

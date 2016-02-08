@@ -32,10 +32,15 @@ public class CritterANNControl : BaseBehaviour
 
     void FixedUpdate()
     {
+        float normalizedLife = critterSensors.SampleLife() / 100f;
+        float normalizedAntenaL = 5f / critterSensors.SampleAntenaL();
+        float normalizedAntenaR = 5f / critterSensors.SampleAntenaR();
+        float antenaDiferential = critterSensors.SampleAntenaL() - critterSensors.SampleAntenaR();
+
         float[] input = new float[] {
-            critterSensors.SampleLife() / 100f,
-            5f / critterSensors.SampleAntenaL(),
-            5f / critterSensors.SampleAntenaR()
+            normalizedLife,
+            antenaDiferential,
+            critterSensors.SampleAntenaL()
         };
 
         float[] output = neuralNetwork.Query(input);

@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ada9034a80f90294aad49052709a3cd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  feedAmount: 30
+  feedAmount: 40
 --- !u!212 &21207778
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -225,7 +225,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: feedAmount
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
