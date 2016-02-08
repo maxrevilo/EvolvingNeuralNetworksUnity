@@ -28,8 +28,14 @@ public class CritterSensors : BaseBehaviour
 
     void Start()
     {
-        foods = (GameObject[])scene.foods.Clone();
         if (scene == null) throw new Exception("scene not set");
+        if(scene.foods != null)
+        {
+            foods = (GameObject[])scene.foods.Clone();
+        } else
+        {
+            Debug.LogWarning("Scene.foods not found, can't detect near food.");
+        }
     }
 
     public int SampleLife()
@@ -51,9 +57,9 @@ public class CritterSensors : BaseBehaviour
 
     private void FixedUpdate()
     {
-        InsertionSort(foods);
-        if(foods.Length > 0)
+        if(foods != null && foods.Length > 0)
         {
+            InsertionSort(foods);
             GameObject closestFood = foods[0];
 
             Debug.DrawLine(transform.position, closestFood.transform.position, debugColor);

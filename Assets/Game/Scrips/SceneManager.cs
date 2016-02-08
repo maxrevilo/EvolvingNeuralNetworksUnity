@@ -18,6 +18,11 @@ public class SceneManager : BaseBehaviour
     protected float bestFitness = 0;
     protected float avgFitness = 0;
 
+    public void setTimeScale(float scale)
+    {
+        Time.timeScale = scale;
+    }
+
     protected virtual void Start()
     {
         generationNumber = 0;
