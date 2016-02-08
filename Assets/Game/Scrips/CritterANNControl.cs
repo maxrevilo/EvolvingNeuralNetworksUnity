@@ -30,7 +30,7 @@ public class CritterANNControl : BaseBehaviour
         neuralNetwork.RandomizeWeights(seed, minNeuronInitialWeight, maxNeuronInitialWeight);
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float[] input = new float[] {
             critterSensors.SampleLife() / 100f,
