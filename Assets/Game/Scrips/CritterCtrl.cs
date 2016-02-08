@@ -3,6 +3,8 @@ using System;
 
 public class CritterCtrl : BaseBehaviour
 {
+    public enum CritterStatus { Alive, Starved, Overfeeded };
+
     public delegate void DiedEvent(GameObject critter);
     public event DiedEvent OnDied;
 
@@ -14,6 +16,8 @@ public class CritterCtrl : BaseBehaviour
 
     [SerializeField]
     private float lifeConsumtion = 15f;
+
+    public CritterStatus status { get; private set; }
 
     public bool isAlive() { return life > 0; }
 
@@ -34,16 +38,18 @@ public class CritterCtrl : BaseBehaviour
 
     public void Feed(int amout)
     {
-        SetLife(amout);
+        SetLife(getLife() + amout);
     }
 
     public void Starve()
     {
+        status = CritterStatus.Starved;
         Die();
     }
 
     public void Overfeeded()
     {
+        status = CritterStatus.Overfeeded;
         Die();
     }
 
@@ -80,6 +86,7 @@ public class CritterCtrl : BaseBehaviour
         birthTime = Time.time;
         deadTime = 0;
         lastTimeSienceConsumtion = Time.time;
+        status = CritterStatus.Alive;
     }
 
     private void CritterDied()
