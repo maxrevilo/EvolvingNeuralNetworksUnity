@@ -10,6 +10,9 @@ class CritterGraphics: BaseBehaviour
     [SerializeField]
     private Color healtyColor = Color.green;
 
+	[SerializeField]
+	private Color midColor = Color.yellow;
+
     [SerializeField]
     private Color starvingColor = Color.red;
 
@@ -29,7 +32,13 @@ class CritterGraphics: BaseBehaviour
     {
         float lifePercent = Mathf.InverseLerp(0, critter.getMaxLife(), critter.getLife());
 
-        Color currentColor = Color.Lerp(starvingColor, healtyColor, lifePercent);
+		Color currentColor;
+
+		if (lifePercent > 0.5f) {
+			currentColor = Color.Lerp(midColor, healtyColor, 2f * (lifePercent - .5f));
+		} else {
+			currentColor = Color.Lerp(starvingColor, midColor, 2f * lifePercent);
+		}
 
         torzo.color = currentColor;
     }
